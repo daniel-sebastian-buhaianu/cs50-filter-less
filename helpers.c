@@ -56,7 +56,31 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
+	// create a "mirrored" copy of image (mirror effect)
+	RGBTRIPLE mirrored_image[height][width];
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			int k = width - 1 - j;
+			// mirrored_image[i][j] = image[i][k] to create mirror effect
+			mirrored_image[i][j].rgbtRed = image[i][k].rgbtRed;
+			mirrored_image[i][j].rgbtGreen = image[i][k].rgbtGreen;
+			mirrored_image[i][j].rgbtBlue = image[i][k].rgbtBlue;
+		}
+	}
+
+	// replace image[][] with mirrored_image[][]
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			image[i][j].rgbtRed = mirrored_image[i][j].rgbtRed;
+			image[i][j].rgbtGreen = mirrored_image[i][j].rgbtGreen;
+			image[i][j].rgbtBlue = mirrored_image[i][j].rgbtBlue;
+		}
+	}
+	return;
 }
 
 // Blur image
